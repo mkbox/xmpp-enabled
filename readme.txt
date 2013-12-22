@@ -12,6 +12,10 @@ XMPP Enabled provides a single-function API for other plugins that use Jabber/XM
 XMPP Enabled provides a single function API for other plugins that use Jabber/XMPP messaging protocol.
 See API section for details if you want to use XMPP protocol in your notifications.
 
+GitHub page: https://github.com/sandfox-im/xmpp-enabled
+
+Packagist page: https://packagist.org/packages/sandfox-im/xmpp-enabled
+
 == Installation ==
 
 1. Upload `xmpp-enabled` folder to the `/wp-content/plugins/` directory
