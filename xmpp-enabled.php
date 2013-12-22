@@ -60,7 +60,7 @@ class XMPPEnabled
             return;
         }
 
-        if (empty($jid))
+        if (empty($password))
         {
             xmpp_log(__('Password field is empty', 'xmpp-enabled'));
             return;
