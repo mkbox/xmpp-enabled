@@ -3,7 +3,7 @@ Contributors: Anton Smirnov
 Tags: xmpp, jabber, library
 Requires at least: 3.0
 Tested up to: 3.0
-Stable tag: 0.3.0
+Stable tag: trunk
 
 XMPP Enabled provides a single-function API for other plugins that use Jabber/XMPP messaging protocol.
 
@@ -29,6 +29,9 @@ To provide a single XMPP account settings page for all Jabber notification plugi
 It's safe to use xmpp_send() multiple times. However in PHP older than 5.0 it will cause multiple connections to the XMPP server.
 
 == Changelog ==
+
+= 0.3.1 =
+* Bugfix for disabling encryption
 
 = 0.3.0 =
 * Multiple calls to xmpp_send() now use single connection in PHP 5.0 and newer

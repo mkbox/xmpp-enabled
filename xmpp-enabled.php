@@ -3,7 +3,7 @@
 Plugin Name: XMPP Enabled
 Plugin URI: http://sand-fox.com/projects/xmpp-enabled.html
 Description: A simple library plugin for XMPP notifications
-Version: 0.3.0
+Version: 0.3.1
 Author: Sand Fox
 Author URI: http://sand-fox.com/
 
@@ -81,7 +81,7 @@ class xmpp_class
 
             if(!$encryption)
             {
-                $this->conn->use_encryption = false;
+                $this->conn->useEncryption(false);
             }
 
             $this->conn->connect();
