@@ -1,0 +1,6 @@
+# intellij idea
+.idea
+*.iml
+
+# compiled langs
+*.mo

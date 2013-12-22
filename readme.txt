@@ -1,8 +1,8 @@
 === Plugin Name ===
-Contributors: Sand Fox
+Contributors: sandfox
 Tags: xmpp, jabber, library
 Requires at least: 3.0
-Tested up to: 3.6
+Tested up to: 3.8
 Stable tag: trunk
 
 XMPP Enabled provides a single-function API for other plugins that use Jabber/XMPP messaging protocol.
@@ -28,7 +28,15 @@ To provide a single XMPP account settings page for all Jabber notification plugi
 
 It's safe to use xmpp_send() multiple times. All calls will use the same connection
 
+== Thanks to ==
+* Mako N (Japanese translation and i18n support)
+
 == Changelog ==
+
+= 1.0.0 =
+* Japanese translation and internationalisation support from Mako N
+* Consider plugin is stable :)
+* Installation via composer
 
 = 0.3.2.2 =
 sand-fox.com to sandfox.org

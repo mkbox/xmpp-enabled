@@ -1,45 +1,49 @@
 <?php
-/*
-Plugin Name: XMPP Enabled
-Plugin URI: http://sandfox.org/projects/xmpp-enabled.html
-Description: A simple library plugin for XMPP notifications
-Version: 0.3.2.02
-Author: Sand Fox
-Author URI: http://sandfox.im/
-Text Domain: xmpp-enabled
-Domain Path: /languages
-
-  Copyright 2010 Anton Smirnov
-
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-        http://www.gnu.org/licenses/gpl-2.0.html
-
-*/
+/**
+ * Plugin Name: XMPP Enabled
+ * Plugin URI: http://sandfox.org/projects/xmpp-enabled.html
+ * Description: A simple library plugin for XMPP notifications
+ * Version: 1.0.0
+ * Author: Sand Fox
+ * Author URI: http://sandfox.org/
+ * Text Domain: xmpp-enabled
+ * Domain Path: /languages
+ */
+/**
+ * Copyright 2010, Anton Smirnov
+ * Copyright 2013, XMPP Enabled contributors
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ *      http://www.gnu.org/licenses/gpl-2.0.html
+ */
 
 require_once(dirname(__FILE__) . '/XMPPHP/XMPP.php');
 
-load_plugin_textdomain( 'xmpp-enabled', false, basename(dirname(__FILE__)) . '/languages' );
+load_plugin_textdomain('xmpp-enabled', false, basename(dirname(__FILE__)) . '/languages');
 
-$xmpp_object = null;
-
-class xmpp_class
+class XMPPEnabled
 {
-    public $conn;
-    public $connected;
+    private static $instance = null;
 
-    function __construct()
+    private $conn;
+    private $connected;
+
+    public static function instance()
     {
-        global $xmpp_connection_established;
+        return self::$instance ?: self::$instance = new self();
+    }
 
+    private function __construct()
+    {
         $jid       = get_option('xmpp_default_jid');
         $jid_elems = explode('@', $jid);
         $username  = $jid_elems[0];
@@ -50,34 +54,32 @@ class xmpp_class
         $port      = get_option('xmpp_default_port');
         $encryption = get_option('xmpp_enable_encryption', true);
 
-        if(empty($jid))
+        if (empty($jid))
         {
             xmpp_log(__('JID field is empty', 'xmpp-enabled'));
-            return false;
+            return;
         }
 
-        if(empty($jid))
+        if (empty($jid))
         {
             xmpp_log(__('Password field is empty', 'xmpp-enabled'));
-            return false;
+            return;
         }
 
-        if(empty($port))
+        if (empty($port))
         {
             $port = '5222';
         }
 
-        if(empty($host))
+        if (empty($host))
         {
             $host = $server;
         }
 
-        if(empty($resource))
+        if (empty($resource))
         {
             $resource = 'WordPress';
         }
-
-        $error = false;
 
         try
         {
@@ -118,23 +120,34 @@ class xmpp_class
     {
         $this->conn->disconnect();
     }
+
+    /**
+     * @return boolean
+     */
+    public function isConnected()
+    {
+        return $this->connected;
+    }
+
+    /**
+     * @return \XMPPHP_XMPP
+     */
+    public function conn()
+    {
+        return $this->conn;
+    }
 }
 
 function xmpp_send($recipient, $text, $subject='', $msg_type='normal')
 {
-    global $xmpp_object;
+    $xmpp_object = XMPPEnabled::instance();
 
-    if(!$xmpp_object)
-    {
-        $xmpp_object = new xmpp_class();
-    }
-
-    if(!$xmpp_object->connected)
+    if (!$xmpp_object->isConnected())
     {
         return false;
     }
 
-    if(($msg_type != 'chat') && ($msg_type != 'headline'))
+    if (($msg_type != 'chat') && ($msg_type != 'headline'))
     {
         $msg_type = 'normal';
     }
@@ -143,9 +156,9 @@ function xmpp_send($recipient, $text, $subject='', $msg_type='normal')
 
     try
     {
-        $xmpp_object->conn->message($recipient, $text, $msg_type, $subject);
+        $xmpp_object->conn()->message($recipient, $text, $msg_type, $subject);
     }
-    catch(Exception $e)
+    catch (Exception $e)
     {
         $error = $e->getMessage();
         $logs = Array();
@@ -210,7 +223,6 @@ add_action('admin_menu', 'xmpp_create_menu', 0);
 function xmpp_create_menu()
 {
     add_menu_page('XMPP Enabled Settings', 'XMPP Enabled', 'administrator', 'xmpp-enabled', 'xmpp_settings_page');
-//    add_submenu_page('xmpp-enabled', 'XMPP Enabled Settings', 'XMPP Enabled', 'administrator', __FILE__, 'xmpp_settings_page');
     add_action('admin_init', 'register_xmpp_settings');
 }
 
@@ -332,4 +344,4 @@ function xmpp_settings_page() {
 
     </div>
     <?php
-} ?>
+}

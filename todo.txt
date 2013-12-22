@@ -1,0 +1,2 @@
+1) reorganise everything into classes
+2) some kind of build script
