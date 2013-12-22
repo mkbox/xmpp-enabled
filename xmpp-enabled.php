@@ -6,6 +6,8 @@ Description: A simple library plugin for XMPP notifications
 Version: 0.3.2.02
 Author: Sand Fox
 Author URI: http://sandfox.im/
+Text Domain: xmpp-enabled
+Domain Path: /languages
 
   Copyright 2010 Anton Smirnov
 
@@ -23,7 +25,9 @@ Author URI: http://sandfox.im/
 
 */
 
-require_once(ABSPATH.'/wp-content/plugins/xmpp-enabled/XMPPHP/XMPP.php');
+require_once(dirname(__FILE__) . '/XMPPHP/XMPP.php');
+
+load_plugin_textdomain( 'xmpp-enabled', false, basename(dirname(__FILE__)) . '/languages' );
 
 $xmpp_object = null;
 
@@ -48,13 +52,13 @@ class xmpp_class
 
         if(empty($jid))
         {
-            xmpp_log('JID field is empty');
+            xmpp_log(__('JID field is empty', 'xmpp-enabled'));
             return false;
         }
 
         if(empty($jid))
         {
-            xmpp_log('Password field is empty');
+            xmpp_log(__('Password field is empty', 'xmpp-enabled'));
             return false;
         }
 
@@ -87,7 +91,7 @@ class xmpp_class
             $this->conn->connect();
             if($this->conn->isDisconnected())
             {
-                throw new Exception('Connection is not started');
+                throw new Exception(__('Connection is not started', 'xmpp-enabled'));
             }
             $this->conn->processUntil('session_start');
         }
@@ -196,7 +200,7 @@ function xmpp_test()
 {
     $jid = get_option('xmpp_default_jid');
 
-    return xmpp_send($jid, 'XMPP Enabled works!', 'XMPP Enabled Test');
+    return xmpp_send($jid, __('XMPP Enabled works!', 'xmpp-enabled'), __('XMPP Enabled Test', 'xmpp-enabled'));
 }
 
 /* ----- settings section -------- */
@@ -227,34 +231,34 @@ function register_xmpp_settings()
 function xmpp_settings_page() {
     ?>
     <div class="wrap">
-    <h2>XMPP Enabled Settings</h2>
+    <h2><?php _e('XMPP Enabled Settings', 'xmpp-enabled') ?></h2>
 
     <form method="post" action="options.php">
         <?php settings_fields('xmpp-defaults'); ?>
         <table class="form-table">
-            <tr><th colspan="2">Default XMPP account settings:</th></tr>
+            <tr><th colspan="2"><?php _e('Default XMPP account settings:', 'xmpp-enabled') ?></th></tr>
             <tr valign="top">
-                <th scope="row">JID</th>
+                <th scope="row"><?php _e('JID', 'xmpp-enabled') ?></th>
                 <td><input type="text" name="xmpp_default_jid" value="<?php echo get_option('xmpp_default_jid'); ?>" /></td>
             </tr>
 
             <tr valign="top">
-                <th scope="row">Password</th>
+                <th scope="row"><?php _e('Password', 'xmpp-enabled') ?></th>
                 <td><input type="password" name="xmpp_default_password" value="<?php echo get_option('xmpp_default_password'); ?>" /></td>
             </tr>
 
             <tr valign="top">
-                <th scope="row">Resource name</th>
+                <th scope="row"><?php _e('Resource name', 'xmpp-enabled') ?></th>
                 <td><input type="text" name="xmpp_default_resource" value="<?php echo get_option('xmpp_default_resource'); ?>" /></td>
             </tr>
 
             <tr valign="top">
-                <th scope="row">Server hostname<br/><small>leave blank unless it differs from jid hostname</small></th>
+                <th scope="row"><?php _e('Server hostname', 'xmpp-enabled') ?><br/><small><?php _e('leave blank unless it differs from jid hostname', 'xmpp-enabled') ?></small></th>
                 <td><input type="text" name="xmpp_default_host" value="<?php echo get_option('xmpp_default_host'); ?>" /></td>
             </tr>
 
             <tr valign="top">
-                <th scope="row">Server port<br/><small>leave blank unless it is not 5222</small></th>
+                <th scope="row"><?php _e('Server port', 'xmpp-enabled') ?><br/><small><?php _e('leave blank unless it is not 5222', 'xmpp-enabled') ?></small></th>
                 <td><input type="text" name="xmpp_default_port" value="<?php echo get_option('xmpp_default_port'); ?>" /></td>
             </tr>
 
@@ -262,24 +266,24 @@ function xmpp_settings_page() {
                 <th scope="row" colspan="2">
                     <input type="checkbox" value="1" name="xmpp_enable_encryption" id="xmpp_enable_encryption"
                         <?php if(get_option('xmpp_enable_encryption', true)) echo 'checked="checked"' ?>
-                    /> <label for="xmpp_enable_encryption">Enable encryption</label>
+                    /> <label for="xmpp_enable_encryption"><?php _e('Enable encryption', 'xmpp-enabled') ?></label>
                 </th>
             </tr>
 
             <tr valign="top">
                 <th scope="row" colspan="2">
                     <input type="checkbox" checked="checked" value="1" name="xmpp_send_test_msg" id="xmpp_send_test_msg"/>
-                    <label for="xmpp_send_test_msg">Also test the connection</label></th>
+                    <label for="xmpp_send_test_msg"><?php _e('Also test the connection', 'xmpp-enabled') ?></label></th>
             </tr>
         </table>
 
         <p class="submit">
-            <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+            <input type="submit" class="button-primary" value="<?php _e('Save Changes', 'xmpp-enabled') ?>" />
         </p>
 
     </form>
 
-    <h3>Send Test Message</h3>
+    <h3><?php _e('Send Test Message', 'xmpp-enabled') ?></h3>
 
     <form method="post" action="options.php">
     <?php settings_fields('xmpp-test'); ?>
@@ -290,22 +294,22 @@ function xmpp_settings_page() {
         if(get_option('xmpp_send_test_msg'))
         {
             update_option('xmpp_send_test_msg', false);
-            $test_submit = 'Send another';
+            $test_submit = __('Send another', 'xmpp-enabled');
             if(xmpp_test())
             {
-                echo '<p style="color: green">Message has been sent successfully</p>';
-                xmpp_log('Test successful');
+                echo '<p style="color: green">' . __('Message has been sent successfully', 'xmpp-enabled') . '</p>';
+                xmpp_log(__('Test successful', 'xmpp-enabled'));
             }
             else
             {
-                echo '<p style="color: red">Error on sending message</p>';
-                xmpp_log('Test failed');
+                echo '<p style="color: red">' . __('Error on sending message', 'xmpp-enabled') . '</p>';
+                xmpp_log(__('Test failed', 'xmpp-enabled'));
             }
         }
         else
         {
-            echo '<p>You can send a message to yourself to test the settings above</p>';
-            $test_submit = 'Send';
+            echo '<p>' . __('You can send a message to yourself to test the settings above', 'xmpp-enabled') . '</p>';
+            $test_submit = __('Send', 'xmpp-enabled');
         }
 
     ?>
@@ -314,7 +318,7 @@ function xmpp_settings_page() {
 
     </form>
 
-    <h3>XMPP Log</h3>
+    <h3><?php _e('XMPP Log', 'xmpp-enabled') ?></h3>
     <pre><?php
         foreach(
             array_reverse(

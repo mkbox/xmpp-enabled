@@ -1,0 +1,137 @@
+# Copyright (C) 2013 XMPP Enabled
+# This file is distributed under the same license as the XMPP Enabled package.
+msgid ""
+msgstr ""
+"Project-Id-Version: XMPP Enabled 0.3.2.02\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/xmpp-enabled\n"
+"POT-Creation-Date: 2013-12-22 02:41:54+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: xmpp-enabled.php:57
+msgid "JID field is empty"
+msgstr ""
+
+#: xmpp-enabled.php:63
+msgid "Password field is empty"
+msgstr ""
+
+#: xmpp-enabled.php:96
+msgid "Connection is not started"
+msgstr ""
+
+#: xmpp-enabled.php:205
+msgid "XMPP Enabled works!"
+msgstr ""
+
+#: xmpp-enabled.php:205
+msgid "XMPP Enabled Test"
+msgstr ""
+
+#: xmpp-enabled.php:236
+msgid "XMPP Enabled Settings"
+msgstr ""
+
+#: xmpp-enabled.php:241
+msgid "Default XMPP account settings:"
+msgstr ""
+
+#: xmpp-enabled.php:243
+msgid "JID"
+msgstr ""
+
+#: xmpp-enabled.php:248
+msgid "Password"
+msgstr ""
+
+#: xmpp-enabled.php:253
+msgid "Resource name"
+msgstr ""
+
+#: xmpp-enabled.php:258
+msgid "Server hostname"
+msgstr ""
+
+#: xmpp-enabled.php:258
+msgid "leave blank unless it differs from jid hostname"
+msgstr ""
+
+#: xmpp-enabled.php:263
+msgid "Server port"
+msgstr ""
+
+#: xmpp-enabled.php:263
+msgid "leave blank unless it is not 5222"
+msgstr ""
+
+#: xmpp-enabled.php:271
+msgid "Enable encryption"
+msgstr ""
+
+#: xmpp-enabled.php:278
+msgid "Also test the connection"
+msgstr ""
+
+#: xmpp-enabled.php:283
+msgid "Save Changes"
+msgstr ""
+
+#: xmpp-enabled.php:288
+msgid "Send Test Message"
+msgstr ""
+
+#: xmpp-enabled.php:299
+msgid "Send another"
+msgstr ""
+
+#: xmpp-enabled.php:302
+msgid "Message has been sent successfully"
+msgstr ""
+
+#: xmpp-enabled.php:303
+msgid "Test successful"
+msgstr ""
+
+#: xmpp-enabled.php:307
+msgid "Error on sending message"
+msgstr ""
+
+#: xmpp-enabled.php:308
+msgid "Test failed"
+msgstr ""
+
+#: xmpp-enabled.php:313
+msgid "You can send a message to yourself to test the settings above"
+msgstr ""
+
+#: xmpp-enabled.php:314
+msgid "Send"
+msgstr ""
+
+#: xmpp-enabled.php:323
+msgid "XMPP Log"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "XMPP Enabled"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://sandfox.org/projects/xmpp-enabled.html"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "A simple library plugin for XMPP notifications"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Sand Fox"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://sandfox.im/"
+msgstr ""
