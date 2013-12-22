@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: XMPP Enabled
-Plugin URI: http://sand-fox.com/projects/xmpp-enabled.html
+Plugin URI: http://sandfox.org/projects/xmpp-enabled.html
 Description: A simple library plugin for XMPP notifications
-Version: 0.3.1
+Version: 0.3.2.02
 Author: Sand Fox
-Author URI: http://sand-fox.com/
+Author URI: http://sandfox.im/
 
   Copyright 2010 Anton Smirnov
 
@@ -29,8 +29,8 @@ $xmpp_object = null;
 
 class xmpp_class
 {
-    var $conn;
-    var $connected;
+    public $conn;
+    public $connected;
 
     function __construct()
     {
@@ -123,11 +123,6 @@ function xmpp_send($recipient, $text, $subject='', $msg_type='normal')
     if(!$xmpp_object)
     {
         $xmpp_object = new xmpp_class();
-
-        if (version_compare(PHP_VERSION, '5.0.0', '<'))
-        {
-            $xmpp_object->__construct(); // php4 patch
-        }
     }
 
     if(!$xmpp_object->connected)
@@ -160,18 +155,12 @@ function xmpp_send($recipient, $text, $subject='', $msg_type='normal')
         xmpp_log($logs);
     }
 
-    if (version_compare(PHP_VERSION, '5.0.0', '<'))
-    {
-        $xmpp_object->__destruct(); // php4 patch
-        $xmpp_object = null; // php5 is strongly recommended
-    }
-
     return !($error);
 }
 
-function xmpp_log($msg = 'Someone have forgotten to enter the log message :)')
+function xmpp_log($msg = 'Someone forgot to enter the log message :)')
 {
-    $log = unserialize(get_option('xmpp_log'));
+    $log = get_option('xmpp_log', array());
 
     $new_log = Array();
 
@@ -196,11 +185,11 @@ function xmpp_log($msg = 'Someone have forgotten to enter the log message :)')
 
         if(!--$i)
         {
-	    break;
+            break;
         }
     }
 
-    update_option('xmpp_log', serialize($new_log));
+    update_option('xmpp_log', $new_log);
 }
 
 function xmpp_test()
@@ -270,12 +259,17 @@ function xmpp_settings_page() {
             </tr>
 
             <tr valign="top">
-                <th scope="row" colspan="2"><input type="checkbox" <?php if(get_option('xmpp_enable_encryption', true)) echo 'checked="checked"' ?>
-                        value="1" name="xmpp_enable_encryption"/> Enable encryption</td>
+                <th scope="row" colspan="2">
+                    <input type="checkbox" value="1" name="xmpp_enable_encryption" id="xmpp_enable_encryption"
+                        <?php if(get_option('xmpp_enable_encryption', true)) echo 'checked="checked"' ?>
+                    /> <label for="xmpp_enable_encryption">Enable encryption</label>
+                </th>
             </tr>
 
             <tr valign="top">
-                <th scope="row" colspan="2"><input type="checkbox" checked="checked" value="1" name="xmpp_send_test_msg"/> Also test the connection</td>
+                <th scope="row" colspan="2">
+                    <input type="checkbox" checked="checked" value="1" name="xmpp_send_test_msg" id="xmpp_send_test_msg"/>
+                    <label for="xmpp_send_test_msg">Also test the connection</label></th>
             </tr>
         </table>
 
@@ -324,7 +318,7 @@ function xmpp_settings_page() {
     <pre><?php
         foreach(
             array_reverse(
-                get_option('xmpp_log'))
+                get_option('xmpp_log', array()))
             as $log)
         {
             echo $log;
