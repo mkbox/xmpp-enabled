@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: XMPP Enabled
- * Plugin URI: http://sandfox.org/projects/xmpp-enabled.html
+ * Plugin URI: https://github.com/sandfox-im/xmpp-enabled
  * Description: A simple library plugin for XMPP notifications
  * Version: 1.0.0
  * Author: Sand Fox
