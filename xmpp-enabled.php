@@ -3,7 +3,7 @@
  * Plugin Name: XMPP Enabled
  * Plugin URI: https://github.com/sandfox-im/xmpp-enabled
  * Description: A simple library plugin for XMPP notifications
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Sand Fox
  * Author URI: http://sandfox.org/
  * Text Domain: xmpp-enabled
