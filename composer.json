@@ -9,5 +9,8 @@
             "name": "Anton Smirnov",
             "email": "sandfox@sandfox.im"
         }
-    ]
+    ],
+    "require": {
+        "composer/installers": "~1.0"
+    }
 }
