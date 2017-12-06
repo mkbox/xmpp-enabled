@@ -36,8 +36,19 @@ It's safe to use xmpp_send() multiple times. All calls will use the same connect
 
 == Changelog ==
 
+= 1.0.2 =
+
+* PHP 7 support
+
+= 1.0.1 =
+
+* [Bug] Password validation fix
+
 = 1.0.0 =
 * Japanese translation and internationalisation support from Mako N
+* Russian translation
+* Remove unnecessary part of XMPPHP
+* Lang builder
 * Consider plugin is stable :)
 * Installation via composer
 
