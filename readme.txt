@@ -39,6 +39,7 @@ It's safe to use xmpp_send() multiple times. All calls will use the same connect
 = 1.0.2 =
 
 * PHP 7 support
+* Removed from packagist.org (You can use GitHub link in composer directly)
 
 = 1.0.1 =
 
