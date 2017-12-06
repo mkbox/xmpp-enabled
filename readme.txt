@@ -2,7 +2,7 @@
 Contributors: sandfox
 Tags: xmpp, jabber, library
 Requires at least: 3.0
-Tested up to: 3.9
+Tested up to: 4.9
 Stable tag: trunk
 
 XMPP Enabled provides a single-function API for other plugins that use Jabber/XMPP messaging protocol.
