@@ -4,3 +4,8 @@
 
 # compiled langs
 *.mo
+
+# composer
+/vendor
+/composer.lock
+/wordpress

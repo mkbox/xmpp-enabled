@@ -1,5 +1,5 @@
 {
-    "name": "sandfox-im/xmpp-enabled",
+    "name": "sandfoxme/xmpp-enabled",
     "description": "XMPP Enabled provides a single-function API for other plugins that use Jabber/XMPP messaging protocol",
     "keywords": ["xmpp", "jabber", "wordpress"],
     "type": "wordpress-plugin",
@@ -7,10 +7,14 @@
     "authors": [
         {
             "name": "Anton Smirnov",
-            "email": "sandfox@sandfox.im"
+            "email": "sandfox@sandfox.me"
         }
     ],
     "require": {
         "composer/installers": "~1.0"
+    },
+    "require-dev": {
+        "johnpbloch/wordpress": "*",
+        "wpreadme2markdown/wp2md": "*"
     }
 }
