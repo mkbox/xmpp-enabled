@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd `dirname ${BASH_SOURCE[0]}`
+
+cd ..
+
+php vendor/bin/wp2md readme.txt README.md
