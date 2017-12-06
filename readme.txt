@@ -1,4 +1,5 @@
-=== Plugin Name ===
+=== XMPP Enabled ===
+
 Contributors: sandfox
 Tags: xmpp, jabber, library
 Requires at least: 3.0
